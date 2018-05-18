@@ -1,9 +1,13 @@
 import React from "react";
-import {ReactiveBase, DataSearch} from "@appbaseio/reactivesearch";
+import {
+  ReactiveBase,
+  DataSearch,
+  NumberBox,
+  DateRange,
+  RangeSlider
+} from "@appbaseio/reactivesearch";
 import {ReactiveMap} from "@appbaseio/reactivemaps";
-
-import "./App.css";
-import Filters from "./filters";
+import "./App1.css";
 
 export default () => (
   <div className="main-container">
@@ -13,28 +17,75 @@ export default () => (
       type="listing"
       theme={{
         colors: {
-          primaryColor: "#FF3A4E"
+          primaryColor: "#41ABF5"
         }
       }}
     >
       <div className="nav-container">
         <nav className="nav">
-          <div className="title">airbeds</div>
+          <div className="title">Airbeds</div>
         </nav>
       </div>
-
-      <div className="filter-search-container">
-        <Filters />
-        <DataSearch
-          componentId="search"
-          dataField="name"
-          autosuggest={false}
-          placeholder="Search housings..."
-          iconPosition="left"
-          className="search"
-        />
+      <div className="filters-search-container">
+        <div className="filter-container">
+          <DateRange
+            dataField="date_from"
+            componentId="DateRangeSensor"
+            title="When"
+            numberOfMonths={2}
+            queryFormat="basic_date"
+            initialMonth={new Date("04/01/2017")}
+            className="dateFilter"
+          />
+          <NumberBox
+            componentId="GuestSensor"
+            dataField="accommodates"
+            title="Guests"
+            defaultSelected={2}
+            labelPosition="right"
+            data={{
+              start: 1,
+              end: 16
+            }}
+            className="numberFilter"
+          />
+          <RangeSlider
+            componentId="PriceSensor"
+            dataField="price"
+            title="Price Range"
+            range={{
+              start: 10,
+              end: 250
+            }}
+            rangeLabels={{
+              start: "$10",
+              end: "$250"
+            }}
+            defaultSelected={{
+              start: 10,
+              end: 50
+            }}
+            stepValue={10}
+            interval={20}
+            react={{
+              and: ["DateRangeSensor", "GuestSensor"]
+            }}
+            className="rangeFilter"
+          />
+        </div>
+        <div className="search-container">
+          <DataSearch
+            componentId="search"
+            dataField="name"
+            autosuggest={false}
+            placeholder="Search housings..."
+            iconPosition="left"
+            className="search"
+          />
+        </div>
       </div>
-      <div>
+
+      <div className="result-map-container">
         <ReactiveMap
           componentId="map"
           dataField="location"
