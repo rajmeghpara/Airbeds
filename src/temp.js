@@ -60,7 +60,7 @@ class App1 extends Component {
               </div>
               <div className="dropdown">
                 <button className="button">Guests</button>
-                <div className="dropdown-content">
+                <div className="dropdown-content-guest">
                   <NumberBox
                     componentId="GuestSensor"
                     dataField="accommodates"

@@ -1,13 +1,16 @@
-.nav {
-  width: 100%;
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+.nav-container {
   position: fixed;
-  top: 0px;
-  left: 0px;
-  z-index: 1;
+  width: 100%;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ff3a4e;
+  background: linear-gradient(79.09deg, #32b5f9 0%, #419ced 100%);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   color: #fff;
   height: 80px;
   padding: 0 10px 0 25px;
@@ -16,63 +19,102 @@
     height: 100px;
   }
 }
-main-container {
-  display: flex;
-  flex-direction: column;
-}
-filter-search-container {
-  display: flex;
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 240px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.dropdown-content-guest {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropdown-content-guest {
+  display: block;
+}
+.dropdown:hover .button {
+  background-color: #32b5f9;
+  color: white;
+}
 .title {
-  @import url("https://fonts.googleapis.com/css?family=Pacifico");
-  font-size: 25px;
-  letter-spacing: 0.05rem;
-  font-family: Pacifico, sans-serif;
+  height: 45px;
+  width: 201px;
+  color: #ffffff;
+  font-family: Lato;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 44px;
 }
 
-.search {
-  width: calc(100% - 255px);
-  @media all and (max-width: 768px) {
-    width: 100%;
-    padding-bottom: 20px;
-  }
+.filters-search-container {
+  width: 100%;
+  position: fixed;
+  top: 80px;
+  display: flex;
+  z-index: 2;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #ffffff;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+.button {
+  background-color: #ffffff; /* Green */
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  margin: 8px 20px;
+  cursor: pointer;
+  outline: none;
+  height: 40px;
+  width: 111px;
+  border: 1px solid #7a7a7a;
+  border-radius: 3px;
+}
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
 }
 
 .filter-container {
-  width: 280px;
-  height: 100%;
-  padding: 15px 20px;
-  position: fixed;
-  z-index: 10;
-  left: 0;
-  right: 0;
-  border-right: 1px solid #f0f0f0;
-  & > div {
-    margin: 40px 0;
-  }
-  @media all and (max-width: 768px) {
-    position: static;
-    width: 100%;
-    height: auto;
-    border-right: 0;
-    border-bottom: 1px solid #f0f0f0;
-  }
+  display: flex;
+  flex-direction: row;
+}
+.search {
+  width: 740px;
 }
 
-.rightCol {
-  width: calc(100% - 280px);
-  height: calc(100vh - 52px);
-  left: 280px;
-  position: absolute;
-}
-
-.list {
-  margin-bottom: 30px;
-}
 .card-container {
   width: calc(100% - 480px);
   background-color: #fbfbfb;
+  margin-top: 140px;
   padding: 20px 0;
   display: flex;
   flex-wrap: wrap;
@@ -101,10 +143,11 @@ h2 {
   background-size: cover;
   background-position: center center;
 }
+
 .card__price {
   width: 70px;
   height: 44px;
-  background-color: #424242;
+  background-color: #41abf5;
   position: absolute;
   top: 120px;
   left: 0;
@@ -121,36 +164,25 @@ h2 {
   margin: 0;
   margin-bottom: 4px;
 }
-
 .result-stats {
   text-align: right;
   color: #666;
   font-size: 15px;
 }
 .map-container {
-  width: 480px;
+  top: 160px;
+  width: 740px;
   height: calc(100% - 52px);
   position: fixed;
   right: 0;
 }
-@media all and (min-width: 1441px) {
-  .list-item {
-    width: calc(25% - 16px);
-  }
+.extra-info {
+  display: none;
+  position: absolute;
 }
-@media all and (max-width: 1024px) {
-  .list-item {
-    width: calc(50% - 16px);
-  }
+.label:hover {
+  background-color: red;
 }
-@media all and (max-width: 768px) {
-  width: 100%;
-  position: static;
-  padding: 25px 15px;
-}
-@media all and (max-width: 480px) {
-  .list-item {
-    width: calc(100% - 16px);
-    margin-bottom: 20px;
-  }
+.marker:hover {
+  background-color: yellow;
 }
